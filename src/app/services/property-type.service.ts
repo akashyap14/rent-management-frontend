@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PropertyTypeService {
-  private baseUrl = 'http://localhost:3000/api/property-types';
+  private baseUrl = 'https://rent-backend-tgta.onrender.com/api/property-types';
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any[]> {

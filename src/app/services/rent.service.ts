@@ -7,7 +7,7 @@ import { Rent } from '../models/rent.model';
   providedIn: 'root'
 })
 export class RentService {
-  private baseUrl = 'http://localhost:3000/api/rents'; // Adjust to your API endpoint
+  private baseUrl = 'https://rent-backend-tgta.onrender.com/api/rents'; // Adjust to your API endpoint
   constructor(private http: HttpClient) { }
 
   getAllRents(): Observable<Rent[]> {

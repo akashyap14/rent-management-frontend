@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
   isLoggedIn$ = this.loggedIn.asObservable();
-  private baseUrl = 'http://localhost:3000/api/auth';
+  private baseUrl = 'https://rent-backend-tgta.onrender.com/api/auth';
 
   constructor(private http: HttpClient, private readonly router: Router) {}
 
