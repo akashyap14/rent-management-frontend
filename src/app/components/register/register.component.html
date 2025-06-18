@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="register-container">
+        <h2>Register</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <h2>{{ isPhoneMode ? 'Register via Phone' : 'Register with Email' }}</h2>
+          
+            <div *ngIf="!isPhoneMode">
+              <mat-form-field appearance="fill">
+                <mat-label>Email/Username</mat-label>
+                <input matInput formControlName="username" type="text" />
+                <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
+                  Username is required
+                </mat-error>
+              </mat-form-field>
+          
+              <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" />
+                <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+                  Password is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          
+            <div *ngIf="isPhoneMode">
+              <mat-form-field appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" type="tel" />
+                <mat-error *ngIf="registerForm.get('phone')?.hasError('required')">
+                  Phone is required
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('phone')?.hasError('pattern')">
+                  Enter a valid 10-digit phone number
+                </mat-error>
+              </mat-form-field>
+            </div>
+          
+            <button mat-raised-button color="accent" type="submit" [disabled]="registerForm.invalid">Register</button>
+            <a class="toggle-mode m-1" (click)="toggleMode()">{{ isPhoneMode ? 'Register with Email' : 'Register with Phone' }}</a>
+          </form>
+
+        <p>
+            Already have an account? <a routerLink="/login">Login here</a>
+        </p>
+    </div>
+</div>

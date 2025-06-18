@@ -1,0 +1,50 @@
+.table-container {
+    max-height: 600px; // or any desired scroll height
+    overflow: auto;
+
+    table {
+        width: 100%;
+      }
+      
+      th.mat-header-cell {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background: white;
+        width: 150px;
+        box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.2); // optional shadow
+      }
+}
+  
+  
+  
+  .add-button {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 2;
+  }
+  
+  .footer-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+  }
+  
+  .filter-field {
+    width: 300px;
+    margin: 16px 0;
+    display: block;
+  }
+
+  .summary {
+    margin: 16px 0;
+    padding: 16px;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+  }

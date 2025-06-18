@@ -1,0 +1,43 @@
+<!-- login.component.html -->
+<div class="login-container">
+  <mat-card>
+    <mat-card-title>{{ isOtpMode ? 'Login via OTP' : 'Login with Email/Password' }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="!isOtpMode">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email/Username</mat-label>
+            <input matInput formControlName="username" type="text" />
+            <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Username is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" />
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="isOtpMode">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" type="tel" />
+            <mat-error *ngIf="loginForm.get('phone')?.hasError('required')">
+              Phone is required
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('phone')?.hasError('pattern')">
+              Phone must be a 10-digit number
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+          {{ isOtpMode ? 'Send OTP' : 'Login' }}
+        </button>
+
+        <button mat-button type="button" (click)="toggleMode()">
+          {{ isOtpMode ? 'Login with Email' : 'Login with OTP' }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

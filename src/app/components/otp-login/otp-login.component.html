@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="register-container">
+    <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+      <h2>Verify OTP</h2>
+      <mat-form-field appearance="fill">
+        <mat-label>OTP</mat-label>
+        <input matInput formControlName="otp" type="text" />
+        <mat-error *ngIf="otpForm.get('otp')?.hasError('required')">
+          OTP is required
+        </mat-error>
+        <mat-error *ngIf="otpForm.get('otp')?.hasError('pattern')">
+          OTP must be a number between 4 to 6 digits
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="m-1" type="submit" [disabled]="otpForm.invalid">Verify</button>
+  </form>
+  </div>
+</div>

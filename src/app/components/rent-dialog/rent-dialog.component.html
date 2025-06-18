@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Edit Rent' : 'Add Rent' }}</h2>
+
+<form [formGroup]="rentForm" (ngSubmit)="onSubmit()" class="dialog-form">
+  <mat-dialog-content>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="paymentDate" required />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Renter Name</mat-label>
+      <input matInput formControlName="renterName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Month Paid For</mat-label>
+      <mat-select formControlName="monthPaidFor" required>
+        <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Year Paid For</mat-label>
+      <input matInput type="number" formControlName="yearPaidFor" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Rent Amount</mat-label>
+      <input matInput type="number" formControlName="rentAmount" required />
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Electricity Charges</mat-label>
+      <input matInput type="number" formControlName="electricityCharges" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Other Charges</mat-label>
+      <input matInput type="number" formControlName="otherCharges" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Payment Received</mat-label>
+      <input matInput type="number" formControlName="actualPaymentReceived" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Property Type</mat-label>
+      <mat-select formControlName="propertyType">
+        <mat-option *ngFor="let type of propertyTypes" [value]="type.name">
+          {{ type.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Payment Mode</mat-label>
+      <mat-select formControlName="paymentMode" required>
+        <mat-option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Comments</mat-label>
+      <textarea matInput formControlName="comments"></textarea>
+    </mat-form-field>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="rentForm.invalid">
+      {{ isEdit ? 'Update' : 'Add' }}
+    </button>
+  </mat-dialog-actions>
+</form>
