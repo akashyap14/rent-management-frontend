@@ -1,23 +1,58 @@
-.app-toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-  }
+// .app-toolbar {
+//     position: sticky;
+//     top: 0;
+//     z-index: 1000;
+//     display: flex;
+//     justify-content: space-between;
+//   }
   
-  .app-title {
-    font-size: 1.4rem;
-    font-weight: bold;
-    cursor: pointer;
-  }
+//   .app-title {
+//     font-size: 1.4rem;
+//     font-weight: bold;
+//     cursor: pointer;
+//   }
   
-  .spacer {
-    flex: 1 1 auto;
-  }
+//   .spacer {
+//     flex: 1 1 auto;
+//   }
   
-  a[mat-button] {
-    color: white;
-    text-decoration: none;
-  }
+//   a[mat-button] {
+//     color: white;
+//     text-decoration: none;
+//   }
   
+  /* 📁 navbar.component.scss */
+.sidenav-container {
+  height: 100vh;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.desktop-links {
+  display: flex;
+  gap: 10px;
+}
+
+.mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-links {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: inline-flex;
+  }
+
+  .logo {
+    margin-left: 8px;
+  }
+
+  .mobile-sidenav {
+    width: 250px;
+  }
+}

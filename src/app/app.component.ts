@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { RentDialogComponent } from './components/rent-dialog/rent-dialog.component';
 import { CommonModule } from '@angular/common';
-import { RentListComponent } from './components/rent-list/rent-list.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from './services/auth.service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   standalone: true,
@@ -21,7 +21,9 @@ import { AuthService } from './services/auth.service';
     MatButtonModule,
     MatToolbarModule,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class AppComponent {

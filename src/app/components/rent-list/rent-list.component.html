@@ -1,22 +1,23 @@
-<mat-card class="summary">
+<div class="rent-table" *ngIf="!isMobileView">
+  <mat-card class="summary">
     <div class="summary-row">
       <span>Total Rent Collected:</span>
       <strong>₹{{ totalRent }}</strong>
     </div>
-</mat-card>
-    <mat-form-field appearance="outline" class="filter-field m-3">
-      <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Filter by name or month">
-    </mat-form-field>
-  
-  
+  </mat-card>
+  <mat-form-field appearance="outline" class="filter-field m-3">
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter by name or month">
+  </mat-form-field>
+
+
   <!-- Scrollable Container -->
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-  
+
       <!-- Keep your existing column definitions unchanged -->
       <!-- Just make sure each th uses sticky -->
-  
+
       <ng-container matColumnDef="paymentDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Payment Date</th>
         <td mat-cell *matCellDef="let element">{{ element.paymentDate | date }}</td>
@@ -26,12 +27,12 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Renter`s Name</th>
         <td mat-cell *matCellDef="let element">{{ element.renterName }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="phone">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Phone number</th>
-          <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
-        </ng-container>
-    
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Phone number</th>
+        <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+      </ng-container>
+
       <ng-container matColumnDef="monthPaidFor">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Month</th>
         <td mat-cell *matCellDef="let element">{{ element.monthPaidFor }}</td>
@@ -46,67 +47,87 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Rent Amount</th>
         <td mat-cell *matCellDef="let element">₹{{ element.rentAmount }}</td>
       </ng-container>
-    
+
       <ng-container matColumnDef="actualPaymentReceived">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Payment</th>
         <td mat-cell *matCellDef="let element">₹{{ element.actualPaymentReceived }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="electricityCharges">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Electricity Charges</th>
-          <td mat-cell *matCellDef="let element">₹{{ element.electricityCharges }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Electricity Charges</th>
+        <td mat-cell *matCellDef="let element">₹{{ element.electricityCharges }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="otherCharges">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Other Charges</th>
-          <td mat-cell *matCellDef="let element">₹{{ element.otherCharges }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Other Charges</th>
+        <td mat-cell *matCellDef="let element">₹{{ element.otherCharges }}</td>
       </ng-container>
-    
+
       <ng-container matColumnDef="propertyType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Property</th>
         <td mat-cell *matCellDef="let element">{{ element.propertyType }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="paymentMode">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Payment mode</th>
-          <td mat-cell *matCellDef="let element">{{ element.paymentMode }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Payment mode</th>
+        <td mat-cell *matCellDef="let element">{{ element.paymentMode }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="comments">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Comments</th>
-          <td mat-cell *matCellDef="let element">{{ element.comments }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Comments</th>
+        <td mat-cell *matCellDef="let element">{{ element.comments }}</td>
       </ng-container>
 
       <ng-container matColumnDef="createdBy">
         <th mat-header-cell *matHeaderCellDef>Created By</th>
         <td mat-cell *matCellDef="let rent">{{ rent.user?.username }}</td>
       </ng-container>
-    
+
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef sticky>Actions</th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <button mat-icon-button color="primary" (click)="editRent(element, i)">
+          <button mat-icon-button color="primary" (click)="editRent(element)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteRent(element,i)">
+          <button mat-icon-button color="warn" (click)="deleteRent(element)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
 
-  
+
       <!-- other column definitions ... -->
-  
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-<!-- Paginator and Add Button outside scroll -->
-<div class="footer-controls">
+  <!-- Paginator and Add Button outside scroll -->
+  <div class="footer-controls">
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 50, 100]"></mat-paginator>
 
     <button mat-fab color="primary" class="add-button" (click)="addRent()">
-        <mat-icon>add</mat-icon>
+      <mat-icon>add</mat-icon>
     </button>
+  </div>
 </div>
-  
+<!-- Rent Card (Mobile) -->
+<div class="rent-cards" *ngIf="isMobileView">
+  <div class="rent-card" *ngFor="let rent of rents">
+    <strong>{{ rent.renterName }}</strong>
+    <p>📞 {{ rent.phone }}</p>
+    <p>📅 Payment Date: {{ rent.paymentDate | date }}</p>
+    <p>📅 Month: {{ rent.monthPaidFor }}</p>
+    <p>📅 Year: {{ rent.yearPaidFor }}</p>
+    <p>💰 Rent: ₹{{ rent.rentAmount }}</p>
+    <p>⚡ Electricity: ₹{{ rent.electricityCharges }}</p>
+    <p>🧾 Other: ₹{{ rent.otherCharges }}</p>
+    <p>🧮 Total: ₹{{ rent.paymentMode }}</p>
+    <button mat-icon-button color="primary" (click)="editRent(rent)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteRent(rent)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

@@ -41,8 +41,17 @@ export class RentListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   totalRent = 0;
+  rents: Rent[] = [];
+  isMobileView = false;
 
-  constructor(private dialog: MatDialog, private rentService: RentService) {}
+  constructor(private dialog: MatDialog, private rentService: RentService) {
+    this.checkScreenSize();
+    window.addEventListener('resize', () => this.checkScreenSize.bind(this));
+  }
+
+  checkScreenSize() {
+    this.isMobileView = window.innerWidth <= 768; // Adjust the breakpoint as needed
+  }
 
   ngOnInit() {
     this.loadRents();
@@ -51,6 +60,7 @@ export class RentListComponent {
   loadRents(): void {
     this.rentService.getAllRents().subscribe(rents => {
       this.dataSource.data = rents;
+      this.rents = rents;
       this.totalRent = rents.reduce((sum, r) => sum + r.actualPaymentReceived, 0);
     });
   }
@@ -74,7 +84,7 @@ export class RentListComponent {
     });
   }
 
-  editRent(rent: Rent, index: number) {
+  editRent(rent: Rent) {
     this.dialog.open(RentDialogComponent, {
       width: '500px',
       data: rent
@@ -83,7 +93,7 @@ export class RentListComponent {
     });
   }
 
-  deleteRent(rent: any,id: string): void {
+  deleteRent(rent: any): void {
     if (confirm('Are you sure you want to delete this rent?')) {
       this.rentService.deleteRent(rent._id).subscribe(() => this.loadRents());
     }

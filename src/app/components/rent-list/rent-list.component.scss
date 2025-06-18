@@ -48,3 +48,31 @@
     justify-content: space-between;
     font-size: 18px;
   }
+
+ /* Show/hide using classes */
+.rent-table {
+  display: block;
+}
+
+.rent-cards {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .rent-table {
+    display: none;
+  }
+
+  .rent-cards {
+    display: block;
+  }
+
+  .rent-card {
+    margin: 12px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+}
