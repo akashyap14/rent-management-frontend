@@ -9,8 +9,9 @@
 
   <!-- Desktop Links -->
   <nav class="desktop-links">
-    <a mat-button routerLink="/rents">Rents</a>
-    <a mat-button routerLink="/property-types">Property Types</a>
+    <a mat-button routerLink="/rents" *ngIf="isLoggedIn">Rents</a>
+    <a mat-button routerLink="/property-types" *ngIf="isLoggedIn">Property Types</a>
+    <a mat-button routerLink="/register" *ngIf="!isLoggedIn">Register</a>
     <a mat-button routerLink="/login" *ngIf="!isLoggedIn">Login</a>
     <a mat-button (click)="logout()" *ngIf="isLoggedIn">Logout</a>
   </nav>
@@ -20,8 +21,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over" position="end" class="mobile-sidenav">
     <mat-nav-list>
-      <a mat-list-item routerLink="/rents" (click)="sidenav.close()">Rents</a>
-      <a mat-list-item routerLink="/property-types" (click)="sidenav.close()">Property Types</a>
+      <a mat-list-item routerLink="/rents" (click)="sidenav.close()" *ngIf="isLoggedIn">Rents</a>
+      <a mat-list-item routerLink="/property-types" (click)="sidenav.close()" *ngIf="isLoggedIn">Property Types</a>
+      <a mat-list-item routerLink="/register" (click)="sidenav.close()" *ngIf="!isLoggedIn">Register</a>
       <a mat-list-item routerLink="/login" (click)="sidenav.close()" *ngIf="!isLoggedIn">Login</a>
       <a mat-list-item (click)="logout(); sidenav.close()" *ngIf="isLoggedIn">Logout</a>
     </mat-nav-list>
