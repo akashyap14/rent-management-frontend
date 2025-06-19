@@ -1,8 +1,6 @@
 <!-- login.component.html -->
 <div class="login-container">
-  <mat-card>
-    <mat-card-title>{{ isOtpMode ? 'Login via OTP' : 'Login with Email/Password' }}</mat-card-title>
-    <mat-card-content>
+    <h2>{{ isOtpMode ? 'Login via OTP' : 'Login with Email/Password' }}</h2>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div *ngIf="!isOtpMode">
           <mat-form-field appearance="fill" class="full-width">
@@ -38,6 +36,4 @@
           {{ isOtpMode ? 'Login with Email' : 'Login with OTP' }}
         </button>
       </form>
-    </mat-card-content>
-  </mat-card>
 </div>
