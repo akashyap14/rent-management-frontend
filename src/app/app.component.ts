@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from './services/auth.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { SpinnerComponent } from './components/spinner.component';
 
 @Component({
   standalone: true,
@@ -23,7 +24,8 @@ import { MatListModule } from '@angular/material/list';
     RouterOutlet,
     RouterLink,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    SpinnerComponent
   ]
 })
 export class AppComponent {

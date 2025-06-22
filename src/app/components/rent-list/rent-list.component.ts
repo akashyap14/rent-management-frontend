@@ -13,6 +13,8 @@ import { RentDialogComponent } from '../rent-dialog/rent-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rent } from '../../models/rent.model';
 import { RentService } from '../../services/rent.service';
+import { ExcelExportService } from '../../services/excel-export.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   standalone: true,
@@ -30,7 +32,7 @@ import { RentService } from '../../services/rent.service';
     MatIconModule,
     MatDialogModule,
     MatCardModule,
-    RentDialogComponent,
+    MatSelectModule,
     DatePipe
   ]
 })
@@ -44,7 +46,7 @@ export class RentListComponent {
   rents: Rent[] = [];
   isMobileView = false;
 
-  constructor(private dialog: MatDialog, private rentService: RentService) {
+  constructor(private dialog: MatDialog, private rentService: RentService, private excelExportService : ExcelExportService) {
     this.checkScreenSize();
     window.addEventListener('resize', () => this.checkScreenSize.bind(this));
   }
@@ -73,6 +75,26 @@ export class RentListComponent {
   applyFilter(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.dataSource.filter = value.trim().toLowerCase();
+  }
+
+  downloadExcel() {
+    const allRents = [...this.rents];
+
+    const filteredRents = allRents.map(rent => ({
+      'Payment Date': new Date(rent.paymentDate).toLocaleDateString(),
+      'Renter Name': rent.renterName,
+      'Phone': rent.phone,
+      'Month Paid For': rent.monthPaidFor,
+      'Year Paid For': rent.yearPaidFor,
+      'Rent Amount': rent.rentAmount,
+      'Actual Payment Received': rent.actualPaymentReceived,
+      'Electricity Charges': rent.electricityCharges,
+      'Other Charges': rent.otherCharges,
+      'Property Type': rent.propertyType,
+      'Payment Mode': rent.paymentMode,
+      'Comments': rent.comments,
+    }))
+    this.excelExportService.exportAsExcel( filteredRents, 'rents_' + new Date().toISOString().slice(0, 10));
   }
 
 

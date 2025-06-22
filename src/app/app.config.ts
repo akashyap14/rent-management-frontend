@@ -12,6 +12,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 // import { provideMatDatepicker } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { authInterceptor } from './auth.interceptor';
+import { loaderInterceptor } from './loader.interceptor';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +26,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(MatNativeDateModule), // ✅ REGISTER Native Date Adapter
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([authInterceptor])
-    ),
+      withInterceptors([authInterceptor, loaderInterceptor])
+    )
   ],
 };

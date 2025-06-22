@@ -43,6 +43,7 @@ export class RentDialogComponent {
   paymentModes: string[] = [
     'Cash', 'UPI', 'Bank Transfer', 'Cheque'
   ];
+  startDate = new Date();
 
   constructor(
     private dialogRef: MatDialogRef<RentDialogComponent>,
@@ -56,13 +57,13 @@ export class RentDialogComponent {
     this.rentForm = this.fb.group({
       paymentDate: [data?.paymentDate || '', Validators.required],
       renterName: [data?.renterName || '', Validators.required],
-      phone: [data?.phone || '', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      phone: [data?.phone || '', [ Validators.minLength(10), Validators.maxLength(10)]],
       monthPaidFor: [data?.monthPaidFor || '', Validators.required],
       yearPaidFor: [data?.yearPaidFor || '', Validators.required],
-      rentAmount: [data?.rentAmount || 0, Validators.required],
-      electricityCharges: [data?.electricityCharges || 0],
-      otherCharges: [data?.otherCharges || 0],
-      actualPaymentReceived: [data?.actualPaymentReceived || 0, Validators.required],
+      rentAmount: [data?.rentAmount, Validators.required],
+      electricityCharges: [data?.electricityCharges],
+      otherCharges: [data?.otherCharges],
+      actualPaymentReceived: [data?.actualPaymentReceived, Validators.required],
       propertyType: [data?.propertyType || '', Validators.required],
       paymentMode: [data?.paymentMode || '', Validators.required],
       comments: [data?.comments || '']
